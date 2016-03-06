@@ -15,16 +15,32 @@ namespace MVC5Course.Controllers
         // GET: EF
         public ActionResult Index()
         {
-            var product = new Product()
+            //var product = new Product()
+            //{
+            //    ProductName = "BMW",
+            //    Price = 20,
+            //    Active = true,
+            //    Stock = 10
+            //};
+
+            //db.Product.Add(product);
+
+            //var pKey = product.ProductId;
+
+            var data = db.Product.Take(5).OrderByDescending(p => p.ProductId);
+
+            foreach (var item in data)
             {
-                ProductName = "BMW",
-                Price = 20,
-                Active = true,
-                Stock = 10
-            };
+                item.Price = item.Price + 1;
+            }
 
-            db.Product.Add(product);
+            SaveChange();
 
+            return View(data);
+        }
+
+        private void SaveChange()
+        {
             try
             {
                 db.SaveChanges();
@@ -40,19 +56,6 @@ namespace MVC5Course.Controllers
                 }
                 throw;
             }
-
-            var pKey = product.ProductId;
-
-            var data = db.Product.Take(20).OrderByDescending(p => p.ProductId);
-
-            foreach (var item in data)
-            {
-                item.Price = item.Price + 1;
-            }
-
-            db.SaveChanges();
-
-            return View(data);
         }
 
         public ActionResult Detail(int id)
@@ -66,6 +69,19 @@ namespace MVC5Course.Controllers
         public ActionResult Delete(int id)
         {
             var item = db.Product.Find(id);
+            //db.Product.Remove(item);
+
+            //foreach (var ol in db.OrderLine.Where(p=>p.ProductId == id).ToList())
+            //{
+            //    db.OrderLine.Remove(ol);
+            //}
+
+            //foreach (var ol in item.OrderLine.ToList())
+            //{
+            //    db.OrderLine.Remove(ol);
+            //}
+
+            db.OrderLine.RemoveRange(item.OrderLine);
             db.Product.Remove(item);
             db.SaveChanges();
             return RedirectToAction("Index");
