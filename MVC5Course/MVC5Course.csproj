@@ -224,6 +224,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Products.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\vwClientOrder.cs">
+      <DependentUpon>Products.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
