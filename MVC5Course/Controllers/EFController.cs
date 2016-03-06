@@ -98,5 +98,13 @@ namespace MVC5Course.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+
+        public ActionResult QueryPlan(int num = 10)
+        {
+            var item = db.Product.Include("OrderLine").OrderByDescending(p => p.ProductId).AsQueryable();
+            //var item = db.Database.SqlQuery<Product>(@"Select * From dbo.Product Where ProductId < @p0", num);
+
+            return View(item);
+        }
     }
 }
