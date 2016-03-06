@@ -45,6 +45,13 @@ namespace MVC5Course.Controllers
 
             var data = db.Product.Take(20).OrderByDescending(p => p.ProductId);
 
+            foreach (var item in data)
+            {
+                item.Price = item.Price + 1;
+            }
+
+            db.SaveChanges();
+
             return View(data);
         }
 
@@ -54,6 +61,14 @@ namespace MVC5Course.Controllers
             var data = db.Product.FirstOrDefault(p => p.ProductId == id);
 
             return View(data);
+        }
+
+        public ActionResult Delete(int id)
+        {
+            var item = db.Product.Find(id);
+            db.Product.Remove(item);
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
     }
 }
