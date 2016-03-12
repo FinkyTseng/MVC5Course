@@ -5,3 +5,15 @@
 
 <h2>Index</h2>
 
+<button>取得 JsonTest 資料</button>
+
+@section Scripts { 
+    <script>
+        $('button').click(function () {
+            $.getJSON("/AR/JsonTest", '', function (data) {
+                console.log(data);
+            });
+        });
+    </script>
+}
+
