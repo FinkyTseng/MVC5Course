@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MVC5Course.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -15,21 +16,9 @@ namespace MVC5Course.Controllers
         }
 
         [HttpPost]
-        public ActionResult Index(string Name, DateTime Birthday)
+        public ActionResult Index(MemberViewModel member)
         {
-            return Content(Name + " " + Birthday);
+            return Content(member.Name + " " + member.Birthday);
         }
-
-        //[HttpPost]
-        //public ActionResult Index(FormCollection form)
-        //{
-        //    return Content(form["Name"] + " " + form["Birthday"]);
-        //}
-
-        //[HttpPost]
-        //public ActionResult Index(string temp)
-        //{
-        //    return Content(Request.Form["Name"] + " " + Request.Form["Birthday"]);
-        //}
     }
 }
