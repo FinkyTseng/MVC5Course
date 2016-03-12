@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace MVC5Course.Controllers
 {
-    public class EFController : Controller
+    public class EFController : BaseController
     {
         FabricsEntities db = new FabricsEntities();
 
@@ -101,7 +101,7 @@ namespace MVC5Course.Controllers
 
         public ActionResult QueryPlan(int num = 10)
         {
-            var item = db.Product.Include("OrderLine").OrderByDescending(p => p.ProductId).AsQueryable();
+            var item = db.Product.OrderByDescending(p => p.ProductId).ToList();
             //var item = db.Database.SqlQuery<Product>(@"Select * From dbo.Product Where ProductId < @p0", num);
 
             return View(item);
