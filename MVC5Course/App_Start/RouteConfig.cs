@@ -15,6 +15,8 @@ namespace MVC5Course
 
             routes.MapRoute(
                 name: "Default",
+                //*表可以接收多個參數 ex -> Home/About/2/2
+                //url: "{controller}/{action}/{*id}",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
