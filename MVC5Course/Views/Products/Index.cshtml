@@ -9,6 +9,12 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+
+@if (!String.IsNullOrWhiteSpace(Convert.ToString(TempData["ProductEditMsg"])))
+{
+    <div>@TempData["ProductEditMsg"]</div>
+}
+
 <table class="table">
     <tr>
         <th>

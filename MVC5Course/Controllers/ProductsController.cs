@@ -19,7 +19,7 @@ namespace MVC5Course.Controllers
         public ActionResult Index()
         {
             //OrderLineRepository repoOL = RepositoryHelper.GetOrderLineRepository(repo.UnitOfWork);
-            return View(repo.All());
+            return View(repo.All().Take(5));
         }
 
         // GET: Products/Details/5
@@ -87,6 +87,8 @@ namespace MVC5Course.Controllers
                 var db = (FabricsEntities)repo.UnitOfWork.Context;
                 db.Entry(product).State = EntityState.Modified;
                 db.SaveChanges();
+
+                TempData["ProductEditMsg"] = "產品新增成功";
                 return RedirectToAction("Index");
             }
             return View(product);
