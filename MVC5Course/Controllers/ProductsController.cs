@@ -18,6 +18,7 @@ namespace MVC5Course.Controllers
         // GET: Products
         public ActionResult Index()
         {
+            //OrderLineRepository repoOL = RepositoryHelper.GetOrderLineRepository(repo.UnitOfWork);
             return View(repo.All());
         }
 
