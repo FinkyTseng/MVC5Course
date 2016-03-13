@@ -1,7 +1,10 @@
 ﻿@model IEnumerable<MVC5Course.Models.OrderLine>
 
 @{
+    if (IsAjax)
+    {
         Layout = "";
+    }
 }
 
 <h2>訂單明細</h2>

@@ -16,9 +16,16 @@ namespace MVC5Course.Controllers
         //ProductRepository repo = RepositoryHelper.GetProductRepository();
 
         // GET: Products
-        public ActionResult Index()
+        public ActionResult Index(string type, int? id)
         {
             //OrderLineRepository repoOL = RepositoryHelper.GetOrderLineRepository(repo.UnitOfWork);
+            if (id.HasValue)
+            {
+                ViewBag.SelectedId = id;
+            }
+
+            ViewBag.type = type;
+
             return View(repo.All().Take(5));
         }
 
