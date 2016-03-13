@@ -1181,6 +1181,7 @@
     <Content Include="Views\Home\RazorTest.cshtml" />
     <Content Include="Views\NewBootstrap\_LayoutBootstrap.cshtml" />
     <Content Include="Views\NewBootstrap\Index.cshtml" />
+    <Content Include="Views\NewBootstrap\_ViewStart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
