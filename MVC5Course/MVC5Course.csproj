@@ -1158,6 +1158,7 @@
     <Content Include="Scripts\version.json" />
     <Content Include="Views\MB\Index.cshtml" />
     <Content Include="Views\Member\Login.cshtml" />
+    <Content Include="Views\Shared\ArgumentError.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
