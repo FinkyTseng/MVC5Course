@@ -193,6 +193,8 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MBController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Controllers\共用的ViewBag共享於部分HomeController動作方法Attribute.cs" />
+    <Compile Include="Controllers\紀錄Action執行時間Attribute.cs" />
     <Compile Include="Models\IProduct.cs" />
     <Compile Include="Models\Product批次更新ViewModel.cs" />
     <Compile Include="Controllers\TestController.cs" />
