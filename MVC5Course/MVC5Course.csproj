@@ -192,6 +192,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MBController.cs" />
+    <Compile Include="Controllers\MemberController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="ActionFilters\共用的ViewBag共享於部分HomeController動作方法Attribute.cs" />
     <Compile Include="ActionFilters\紀錄Action執行時間Attribute.cs" />
@@ -1156,6 +1157,7 @@
     <Content Include="Views\AR\Index.cshtml" />
     <Content Include="Scripts\version.json" />
     <Content Include="Views\MB\Index.cshtml" />
+    <Content Include="Views\Member\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
