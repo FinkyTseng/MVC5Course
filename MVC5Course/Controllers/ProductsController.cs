@@ -103,7 +103,7 @@ namespace MVC5Course.Controllers
         {
             var product = repo.Find(id);
 
-            if (TryUpdateModel<Product>(product, new string[] { "ProductId", "ProductName", "Price", "Active", "Stock" }))
+            if (TryUpdateModel<IProduct>(product))
             {
                 repo.UnitOfWork.Commit();
 
