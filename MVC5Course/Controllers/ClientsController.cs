@@ -19,6 +19,8 @@ namespace MVC5Course.Controllers
         public ActionResult Index(int pageNo = 1)
         {
             var client = db.Client.Include(c => c.Occupation).OrderBy(p=>p.ClientId);
+
+            ViewBag.pageNo = pageNo;
             return View(client.ToPagedList(pageNo,10));
         }
 
@@ -83,13 +85,16 @@ namespace MVC5Course.Controllers
         // 詳細資訊，請參閱 http://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ClientId,FirstName,MiddleName,LastName,Gender,DateOfBirth,CreditRating,XCode,OccupationId,TelephoneNumber,Street1,Street2,City,ZipCode,Longitude,Latitude,Notes")] Client client)
+        public ActionResult Edit([Bind(Include = "ClientId,FirstName,MiddleName,LastName,Gender,DateOfBirth,CreditRating,XCode,OccupationId,TelephoneNumber,Street1,Street2,City,ZipCode,Longitude,Latitude,Notes")] Client client, int pageNo = 1)
         {
             if (ModelState.IsValid)
             {
+                TempData["ClientId"] = client.ClientId;
                 db.Entry(client).State = EntityState.Modified;
                 db.SaveChanges();
-                return View("Index", db.Client.Include(c => c.Occupation).ToList());
+
+                TempData["Msg"] = "更新資料成功\r\n您剛才更新的是編號 " + client.ClientId + " 的資料";
+                return RedirectToAction("Index", new { pageNo = pageNo });
             }
             ViewBag.OccupationId = new SelectList(db.Occupation, "OccupationId", "OccupationName", client.OccupationId);
             return View(client);

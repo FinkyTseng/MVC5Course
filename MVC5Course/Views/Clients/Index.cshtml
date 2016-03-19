@@ -5,6 +5,7 @@
 @{
     var data = Model as IPagedList;
 }
+
 @{
     ViewBag.Title = "Index";
     if (IsAjax)
@@ -18,6 +19,17 @@
         LoadingElementId = "loading"
     };
 }
+
+<script>
+    @if (TempData["Msg"] != null)
+    {
+        <text>
+            alert(@(Convert.ToString(TempData["Msg"])));
+            //alert('@Ajax.JavaScriptStringEncode(Convert.ToString(TempData["Msg"]))');
+        </text>
+    }
+
+</script>
 
 <h2>Index</h2>
 
@@ -73,7 +85,7 @@
                 @Html.DisplayFor(modelItem => item.CreditRating)
             </td>
             <td>
-                @Ajax.ActionLink("Edit", "Edit", new { id = item.ClientId }, CommonAjaxOption) |
+                @Ajax.ActionLink("Edit", "Edit", new { id = item.ClientId, pageNo = (int)ViewBag.pageNo }, CommonAjaxOption) |
                 @Ajax.ActionLink("Details", "Details", new { id = item.ClientId }, CommonAjaxOption) |
                 @Ajax.ActionLink("Delete", "Delete", new { id = item.ClientId }, CommonAjaxOption)
             </td>
