@@ -2,6 +2,10 @@
 
 @{
     ViewBag.Title = "Delete";
+    if (IsAjax)
+    {
+        Layout = "";
+    }
 }
 
 <h2>Delete</h2>
