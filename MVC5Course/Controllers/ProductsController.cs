@@ -16,7 +16,7 @@ namespace MVC5Course.Controllers
         //ProductRepository repo = RepositoryHelper.GetProductRepository();
 
         // GET: Products
-        public ActionResult Index(string type, int? id)
+        public ActionResult Index(string type, int? id, bool? isActive)
         {
             //OrderLineRepository repoOL = RepositoryHelper.GetOrderLineRepository(repo.UnitOfWork);
             if (id.HasValue)
@@ -24,9 +24,21 @@ namespace MVC5Course.Controllers
                 ViewBag.SelectedId = id;
             }
 
+            var data = repo.All(true);
+
+            if (isActive != null)
+            {
+                data = data.Where(p => p.Active.Value && p.Active == isActive);
+            }
+
+            List<SelectListItem> item = new List<SelectListItem>();
+            item.Add(new SelectListItem() { Value = "true", Text = "有效" });
+            item.Add(new SelectListItem() { Value = "false", Text = "無效" });
+            ViewBag.isActive = new SelectList(item, "Value", "Text");
+
             ViewBag.type = type;
 
-            return View(repo.All().Take(5));
+            return View(data.Take(10));
         }
 
         [HttpPost]
