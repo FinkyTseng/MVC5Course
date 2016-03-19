@@ -13,9 +13,12 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+@using (Html.BeginForm("Index", "Products", FormMethod.Get)) {
 
-@Html.DropDownList("isActive", "請選擇")
+@Html.TextBox("keyword", null, new { onchange = "this.form.submit();"})
+@Html.DropDownList("isActive", null, "請選擇", new { onchange = "this.form.submit();" })
 
+}
 @if (!String.IsNullOrWhiteSpace(Convert.ToString(TempData["ProductEditMsg"])))
 {
     <div>@TempData["ProductEditMsg"]</div>

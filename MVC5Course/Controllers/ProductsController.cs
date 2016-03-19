@@ -16,7 +16,7 @@ namespace MVC5Course.Controllers
         //ProductRepository repo = RepositoryHelper.GetProductRepository();
 
         // GET: Products
-        public ActionResult Index(string type, int? id, bool? isActive)
+        public ActionResult Index(string type, int? id, bool? isActive, string keyword)
         {
             //OrderLineRepository repoOL = RepositoryHelper.GetOrderLineRepository(repo.UnitOfWork);
             if (id.HasValue)
@@ -28,7 +28,12 @@ namespace MVC5Course.Controllers
 
             if (isActive != null)
             {
-                data = data.Where(p => p.Active.Value && p.Active == isActive);
+                data = data.Where(p => p.Active.HasValue && p.Active.Value == isActive.Value);
+            }
+
+            if (!String.IsNullOrWhiteSpace(keyword))
+            {
+                data = data.Where(p => p.ProductName.Contains(keyword));
             }
 
             List<SelectListItem> item = new List<SelectListItem>();
