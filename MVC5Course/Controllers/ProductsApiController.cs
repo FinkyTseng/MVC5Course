@@ -22,9 +22,13 @@ namespace MVC5Course.Controllers
         }
 
         // GET: api/ProductsApi
-        public IQueryable<Product> GetProduct()
+        public IQueryable<ProductApiViewModel> GetProduct()
         {
-            return db.Product;
+            return from a in db.Product
+                   select new ProductApiViewModel() {
+                       id = a.ProductId,
+                       name = a.ProductName
+                   };
         }
 
         // GET: api/ProductsApi/5
