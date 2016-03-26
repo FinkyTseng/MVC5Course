@@ -204,6 +204,7 @@
     <Compile Include="Controllers\MemberController.cs" />
     <Compile Include="Controllers\NewBootstrapController.cs" />
     <Compile Include="Controllers\OrderLinesController.cs" />
+    <Compile Include="Controllers\ProductsApiController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="ActionFilters\共用的ViewBag共享於部分HomeController動作方法Attribute.cs" />
     <Compile Include="ActionFilters\紀錄Action執行時間Attribute.cs" />
