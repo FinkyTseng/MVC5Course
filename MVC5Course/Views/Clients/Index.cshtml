@@ -24,8 +24,8 @@
     @if (TempData["Msg"] != null)
     {
         <text>
-            alert(@(Convert.ToString(TempData["Msg"])));
-            //alert('@Ajax.JavaScriptStringEncode(Convert.ToString(TempData["Msg"]))');
+            @*alert(@(Convert.ToString(TempData["Msg"])));*@
+            alert('@Ajax.JavaScriptStringEncode(Convert.ToString(TempData["Msg"]))');
         </text>
     }
 
@@ -38,7 +38,7 @@
     <img id="loading" src="~/Content/ajax-loader.gif" style="display: none" />
 </p>
 
-@Html.PagedListPager(data, p => Url.Action("Index", new { pageNo = p }), PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing("#main"))
+@Html.PagedListPager(data, p => Url.Action("Index", new { pageNo = p }))
 
 <table class="table">
     <tr>
@@ -95,7 +95,7 @@
 </table>
 
 
-@Html.PagedListPager(data, p => Url.Action("Index", new { pageNo = p }), PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing("#main"))
+@Html.PagedListPager(data, p => Url.Action("Index", new { pageNo = p }))
 
 
 <div id="Details"></div>
