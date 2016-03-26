@@ -18,7 +18,7 @@ namespace MVC5Course.Controllers
 
         public ProductsApiController()
         {
-            db.Configuration.LazyLoadingEnabled = false;
+            //db.Configuration.LazyLoadingEnabled = false;
         }
 
         // GET: api/ProductsApi
@@ -99,8 +99,8 @@ namespace MVC5Course.Controllers
             {
                 return NotFound();
             }
-
-            db.Product.Remove(product);
+            product.IsDeleted = true;
+            //db.Product.Remove(product);
             db.SaveChanges();
 
             return Ok(product);
@@ -117,7 +117,8 @@ namespace MVC5Course.Controllers
 
         private bool ProductExists(int id)
         {
-            return db.Product.Count(e => e.ProductId == id) > 0;
+            //使用any效能較conut好
+            return db.Product.Any(e => e.ProductId == id);
         }
     }
 }
