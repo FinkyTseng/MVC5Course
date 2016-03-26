@@ -1,7 +1,14 @@
 ﻿<#@ template language="C#" HostSpecific="True" #>
 <#@ output extension=".cshtml" #>
 <#@ include file="Imports.include.t4" #>
+@using PagedList
+@using PagedList.Mvc
 @model IEnumerable<#= "<" + ViewDataTypeName + ">" #>
+
+@{
+    var data = Model as IPagedList;
+}
+
 <#
 // The following chained if-statement outputs the file header code and markup for a partial view, a view using a layout page, or a regular view.
 if(IsPartialView) {
@@ -12,7 +19,19 @@ if(IsPartialView) {
 #>
 
 @{
+    if (IsAjax)
+    {
+        Layout = "";
+    }
+
     ViewBag.Title = "<#= ViewName#>";
+
+	var CommonAjaxOption = new AjaxOptions
+    {
+        UpdateTargetId = "Details",
+        LoadingElementId = "loading"
+    };
+
 <#
 if (!String.IsNullOrEmpty(LayoutPageFile)) {
 #>
@@ -21,6 +40,13 @@ if (!String.IsNullOrEmpty(LayoutPageFile)) {
 }
 #>
 }
+
+    @if (TempData["Msg"] != null)
+    {
+        <script>
+            alert('@Ajax.JavaScriptStringEncode(Convert.ToString(TempData["Msg"]))');
+        </script>
+    }
 
 <h2><#= ViewName#></h2>
 
@@ -103,9 +129,9 @@ if (pkName != null) {
 } else {
 #>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                @Ajax.ActionLink("Edit", "Edit", new { id = item.<#= pkName #>, pageNo = (int)ViewBag.pageNo }, CommonAjaxOption) |
+                @Ajax.ActionLink("Details", "Details", new { id = item.<#= pkName #> }, CommonAjaxOption) |
+                @Ajax.ActionLink("Delete", "Delete", new { id = item.<#= pkName #> }, CommonAjaxOption)
         </td>
 <#
 }
@@ -114,6 +140,11 @@ if (pkName != null) {
 }
 
 </table>
+
+@Html.PagedListPager(data, p => Url.Action("Index", new { pageNo = p }))
+
+<div id="Details"></div>
+
 <#
 // The following code closes the tag used in the case of a view using a layout page and the body and html tags in the case of a regular view page
 #>
